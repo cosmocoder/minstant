@@ -1,0 +1,60 @@
+<!-- Top level template for the chat page -->
+<template name="chat_page">
+	<div class="page-header">
+		<h1>Type in the box below to send a message!</h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well well-lg messages">
+				{{#if Template.subscriptionsReady}}
+					{{#if messages}}
+						{{#each messages}}
+							{{> chat_message}}
+						{{/each}}
+					{{else}}
+						<p class="text-muted">Start a conversation</p>
+					{{/if}}
+				{{else}}
+					{{> loading_chat}}
+				{{/if}}
+
+				{{{writingMessage}}}
+			</div>
+		</div>
+	</div>
+
+    <div class="row">
+		<div class="col-md-12">
+			<form class="js-send-chat">
+				<div class="form-group">
+					<textarea class="input form-control" rows="3" name="chat" placeholder="type your message here..."></textarea>
+				</div>
+
+				<button class="btn btn-primary">Send Message</button>
+			</form>
+		</div>
+	</div>
+</template>
+
+
+<!-- Loading template for chat -->
+<template name="loading_chat">
+	<p>Loading messages&hellip;</p>
+</template>
+
+
+<!-- simple template that displays a message -->
+<template name="chat_message">
+	<div class="message-content {{#if isMyUser userId}}own-message{{/if}}">
+		<div class="avatar-img">
+			<img src="{{avatar userId}}" alt="{{user userId}}">
+		</div>
+
+		<div class="message-body-outer">
+			<div class="message-body-inner">
+				{{{parseEmoticons text}}}
+			</div>
+		</div>
+	</div>
+</template>

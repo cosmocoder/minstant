@@ -1,0 +1,143 @@
+/**** Lobby page */
+
+.user-avatar {
+	display: block;
+	margin-bottom: 20px;
+	padding: 4px;
+	min-height: 100px;
+	text-align: center;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-transition: border 0.2s ease-in-out;
+	-o-transition: border 0.2s ease-in-out;
+	transition: border 0.2s ease-in-out;
+
+	&:hover {
+		border-color: #337ab7;
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+.avatar-img {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	overflow: hidden;
+
+	img {
+		position: absolute;
+		top: 0;
+		left: -100%;
+		right: -100%;
+		bottom: 0;
+		margin: auto;
+		min-width: 100%;
+		min-height: 100%;
+	}
+}
+
+.username {
+	display: block;
+	padding: 5px 0;
+	font-weight: bold;
+}
+
+
+/**** Chat page ****/
+
+@chat_avatar_size: 40px;
+@chat_avatar_gutter: 10px;
+@chat_indent: 20px;
+
+@color-message: #ededf2;
+@color-own-message: #d9edf7;
+
+@width-message-arrow: 6px;
+
+.messages {
+	background: #fafafa;
+    overflow: auto;
+}
+
+.message-content {
+	position: relative;
+	margin-bottom: 10px;
+	overflow: auto;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.avatar-img {
+		width: @chat_avatar_size;
+		height: @chat_avatar_size;
+		padding: 0;
+		margin-right: @chat_avatar_gutter;
+		float: left;
+
+		img {
+			max-width: 100%;
+		}
+	}
+}
+
+.message-body-outer {
+	padding-left: @width-message-arrow;
+	padding-right: @chat_avatar_size + @chat_avatar_gutter + @chat_indent;
+	overflow: auto;
+}
+
+.message-body-inner {
+	background: @color-message;
+	padding: 5px 10px;
+	position: relative;
+
+	&:before {
+		content: '';
+		position: absolute;
+		top: 5px;
+		left: -2 * @width-message-arrow;
+		border: @width-message-arrow solid transparent;
+		border-right: @width-message-arrow solid @color-message;
+	}
+
+	.meteoremoticon {
+		display: inline-block;
+        margin: 0 5px;
+        width: 22px;
+		height: 22px;
+	}
+}
+
+.own-message {
+	.avatar-img	{
+		float: right;
+		margin-right: 0;
+		margin-left: @chat_avatar_gutter;
+	}
+
+	.message-body-outer {
+		padding-left: @chat_avatar_size + @chat_avatar_gutter + @chat_indent;
+		padding-right: @width-message-arrow;
+	}
+
+	.message-body-inner {
+		background: @color-own-message;
+
+		&:before {
+			left: auto;
+			right: -@width-message-arrow;
+			border-right: 0;
+			border-left: @width-message-arrow solid @color-own-message;
+		}
+	}
+}
+
+.writing-message {
+    padding: 5px 10px;
+}
