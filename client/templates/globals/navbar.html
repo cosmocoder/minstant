@@ -4,6 +4,14 @@
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/">Minstant!</a>
+				{{#if currentUser}}
+					{{#with currentUserData}}
+					<span class="current-user navbar-text">
+						<img src="{{avatar}}" alt="{{username}}">
+						{{username}}
+					</span>
+					{{/with}}
+				{{/if}}
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar">
 				    <span class="sr-only">Toggle navigation</span>
 				    <span class="icon-bar"></span>

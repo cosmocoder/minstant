@@ -54,7 +54,7 @@ function setMessagesHeight() {
         headerHeight = $('div.page-header').outerHeight(true),
         formHeight = $('form.js-send-chat').closest('div.row').outerHeight(true),
         windowHeight = $(window).height(),
-        $messages = $('div.messages');
+        $messages = $('div.messages');console.log(headerHeight);
 
     $messages.css({height: windowHeight - navBarHeight - headerHeight - formHeight - parseInt($messages.css('marginBottom'), 10)});
 }
@@ -69,6 +69,21 @@ function messagesScrollToBottom() {
 /***** Helpers ****/
 
 Template.chat_page.helpers({
+    otherUserData: function() {
+        var user = Meteor.users.findOne({_id: Router.current().params._id});
+
+        if(user) {
+            Tracker.afterFlush(setMessagesHeight);
+            return {
+                username: user.profile.username,
+                avatar: '/' + user.profile.avatar
+            };
+        }
+        else {
+            return '';
+        }
+    },
+
     messages: function() {
         if( Session.get('chatId') ) {
             var chat = Chats.findOne({_id: Session.get('chatId')});

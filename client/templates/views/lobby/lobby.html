@@ -21,6 +21,11 @@
 
 <!-- display a list of users -->
 <template name="available_user_list">
+	<div class="btn-group filter-users" role="group" aria-label="Filter users">
+		<button class="btn btn-default all">All</button>
+		<button class="btn btn-default online">Online</button>
+	</div>
+
 	<div class="row">
 		{{#each users}}
 			{{> available_user}}
@@ -34,23 +39,14 @@
 <template name="available_user">
 	<div class="col-xs-6 col-sm-3 col-md-2">
 
-		{{#if isMyUser _id}}
-			<div class="user-avatar bg-success">
+		<div class="user-avatar {{#if isUserOnline _id}}online bg-success{{/if}}">
+			<a href="/chat/{{_id}}" class="{{#unless currentUser}}is-locked{{/unless}}">
 				<span class="avatar-img">
 					<img src="/{{profile.avatar}}">
 				</span>
-				<span class="username">{{getUsername _id}} (YOU)</span>
-			</div>
-		{{else}}
-			<div class="user-avatar">
-				<a href="{{#if currentUser}}/chat/{{_id}}{{else}}#{{/if}}" class="{{#unless currentUser}}is-locked{{/unless}}">
-					<span class="avatar-img">
-						<img src="/{{profile.avatar}}">
-					</span>
-					<span class="username">{{getUsername _id}}</span>
-				</a>
-			</div>
-		{{/if}}
+				<span class="username">{{getUsername _id}}</span>
+			</a>
+		</div>
 
 	</div>
 </template>
